@@ -41,3 +41,28 @@ test('path options should have its urls resolved', function(t) {
     t.equal(config.mainConfigFile, __dirname + '/' + fixture.default.mainConfigFile);
     t.equal(config.baseUrl, __dirname + '/' + fixture.default.baseUrl);
 });
+
+test('excludeModules', function(t) {
+    t.plan(5);
+
+    // excludeModules config should not be part of RequireJS config
+    var config = Config.loadObject(fixture, __dirname),
+        libsConfig = config.generate('shared');
+
+    t.equal(libsConfig.excludeModules, undefined);
+
+    // excludeModules config should exclude other modules
+    t.looseEqual(libsConfig.exclude, ['jquery', 'lodash']);
+
+    t.throws(function() {
+        config.generate('excludeModulesFaulty');
+    }, /excludeModules must be an array/);
+
+    t.throws(function() {
+        config.generate('excludeNotArray');
+    }, /exclude must be an array/);
+
+    t.throws(function() {
+        config.generate('excludeMissingModule');
+    }, /Can not exclude unconfigured module/);
+});

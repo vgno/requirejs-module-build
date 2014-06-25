@@ -12,7 +12,7 @@
                 "jquery",
                 "lodash"
             ],
-            "excludeModules": []
+            "excludeModules": null
         },
         "shared": {
             "optimize": "uglify",
@@ -26,6 +26,17 @@
             "subModules": {
                 "mobile": ".mobile."
             }
+        },
+        "excludeModulesFaulty": {
+            "excludeModules": {},
+            "exclude": true
+        },
+        "excludeNotArray": {
+            "excludeModules": ["libs"],
+            "exclude": true
+        },
+        "excludeMissingModule": {
+            "excludeModules": ["missing-module"]
         }
     }
 }
