@@ -66,14 +66,3 @@ test('load config from directory', function(t) {
 
     t.looseEqual(Config.loadFromDirectory(__dirname + '/fixtures/subdir').config, fixture);
 });
-
-test('options should be passed with urls resolved', function(t) {
-    // Config in the options object should be outputed in the generated requirejs config
-    t.plan(3);
-
-    var config = Config.loadObject(fixture, __dirname).generate();
-
-    t.equal(config.optimize, fixture.options.optimize);
-    t.equal(config.mainConfigFile, __dirname + '/' + fixture.options.mainConfigFile);
-    t.equal(config.baseUrl, __dirname + '/' + fixture.options.baseUrl);
-});

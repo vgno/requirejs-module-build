@@ -1,14 +1,12 @@
 {
-    "options": {
+    "default": {
         "mainConfigFile": "public/js/setup.js",
         "baseUrl": "public/js/",
         "output": "public/js/compiled/",
-        "optimize": "uglify2"
+        "optimize": "uglify2",
+        "excludeModules": ["libs", "shared", "admin"]
     },
     "modules": {
-        "default": {
-            "excludeModules": ["libs", "shared", "admin"]
-        },
         "libs": {
             "include": [
                 "jquery",
@@ -17,6 +15,7 @@
             "excludeModules": []
         },
         "shared": {
+            "optimize": "uglify",
             "include": [
                 "utils"
             ],
