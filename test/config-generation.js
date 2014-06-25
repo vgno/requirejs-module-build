@@ -11,7 +11,7 @@ test('generating invalid module', function(t) {
 
     t.throws(function() {
         config.generate('non-existing');
-    }, /No config for module non-existing/);
+    }, /No config for module non-existing/, 'non-existing module should throw');
 });
 
 test('generate requirejs module config', function(t) {
