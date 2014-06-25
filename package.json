@@ -3,5 +3,15 @@
     "version": "0.0.1",
     "author": "Espen Volden <espenv@vg.no>",
     "description": "Tool for building requirejs modules",
-    "main": "./lib/main"
+    "main": "./lib/main",
+    "dependencies": {
+        "findup-sync": "0.1.x"
+    },
+    "devDependencies": {
+        "tape": "2.13.x",
+        "faucet": "0.0.x"
+    },
+    "scripts": {
+        "test": "faucet"
+    }
 }
