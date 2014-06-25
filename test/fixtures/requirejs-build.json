@@ -1,6 +1,32 @@
 {
-    "optimize": "uglify2",
+    "options": {
+        "mainConfigFile": "public/js/setup.js",
+        "baseUrl": "public/js/",
+        "output": "public/js/compiled/",
+        "optimize": "uglify2"
+    },
     "modules": {
-
+        "default": {
+            "excludeModules": ["libs", "shared", "admin"]
+        },
+        "libs": {
+            "include": [
+                "jquery",
+                "lodash"
+            ],
+            "excludeModules": []
+        },
+        "shared": {
+            "include": [
+                "utils"
+            ],
+            "excludeModules": ["libs"]
+        },
+        "instagram": {
+            "directory": "modules/instagram",
+            "subModules": {
+                "mobile": ".mobile."
+            }
+        }
     }
 }
