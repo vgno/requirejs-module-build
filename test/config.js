@@ -48,11 +48,19 @@ test('load config from file', function(t) {
 });
 
 test('load config from directory', function(t) {
-    t.plan(3);
+    t.plan(5);
 
     t.throws(function() {
         Config.loadFromDirectory(__dirname + '/fixtures/requirejs-build.json');
     }, /is not a directory/);
+
+    t.throws(function() {
+        Config.loadFromDirectory('/non/existing/directory');
+    }, /No such directory/);
+
+    t.throws(function() {
+        Config.loadFromDirectory('/');
+    }, /Could not locate requirejs-build.json/);
 
     t.looseEqual(Config.loadFromDirectory(__dirname + '/fixtures').config, fixture);
 

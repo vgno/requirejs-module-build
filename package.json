@@ -10,7 +10,8 @@
     },
     "devDependencies": {
         "tape": "2.13.x",
-        "faucet": "0.0.x"
+        "faucet": "0.0.x",
+        "covert": "0.4.x"
     },
     "scripts": {
         "test": "faucet"
