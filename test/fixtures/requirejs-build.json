@@ -1,10 +1,10 @@
 {
     "default": {
-        "mainConfigFile": "public/js/setup.js",
-        "baseUrl": "public/js/",
-        "output": "public/js/compiled/",
+        "mainConfigFile": "setup.js",
+        "baseUrl": "",
+        "output": "out",
         "optimize": "uglify2",
-        "excludeModules": ["libs", "shared", "admin"]
+        "excludeModules": ["libs", "shared"]
     },
     "modules": {
         "libs": {
@@ -37,6 +37,19 @@
         },
         "excludeMissingModule": {
             "excludeModules": ["missing-module"]
+        },
+        "directory": {
+            "directory": "directory"
+        },
+        "invalidDirectory": {
+            "directory": {}
+        },
+        "missingDirectory": {
+            "directory": "missing-directory"
+        },
+        "includeNotArray": {
+            "directory": "directory",
+            "include": {}
         }
     }
 }
