@@ -8,7 +8,7 @@ var fixture = JSON.parse(fs.readFileSync(__dirname + '/fixtures/requirejs-build.
 test('generating invalid module', function(t) {
     t.plan(1);
 
-    var config = loader.loadObject(fixture, __dirname);
+    var config = loader.object(fixture, __dirname);
 
     t.throws(function() {
         config.generate('non-existing');
@@ -18,7 +18,7 @@ test('generating invalid module', function(t) {
 test('generate requirejs module config', function(t) {
     t.plan(2);
 
-    var config = loader.loadObject(fixture, __dirname).generate('libs');
+    var config = loader.object(fixture, __dirname).generate('libs');
 
     t.equals(config.optimize, fixture.default.optimize);
     t.looseEquals(config.include, fixture.modules.libs.include);
@@ -27,14 +27,14 @@ test('generate requirejs module config', function(t) {
 test('module config should override default config', function(t) {
     t.plan(1);
 
-    var config = loader.loadObject(fixture, __dirname).generate('shared');
+    var config = loader.object(fixture, __dirname).generate('shared');
 
     t.equals(config.optimize, fixture.modules.shared.optimize);
 });
 
 test('path options should have its urls resolved', function(t) {
     // Config in the default object should be outputed in the generated requirejs config
-    var config = loader.loadObject(fixture, __dirname).generate('libs');
+    var config = loader.object(fixture, __dirname).generate('libs');
 
     t.plan(3);
 
@@ -47,7 +47,7 @@ test('excludeModules', function(t) {
     t.plan(5);
 
     // excludeModules config should not be part of RequireJS config
-    var config = loader.loadObject(fixture, __dirname),
+    var config = loader.object(fixture, __dirname),
         libsConfig = config.generate('shared');
 
     t.equals(libsConfig.excludeModules, undefined);
@@ -72,7 +72,7 @@ test('directory option', function(t) {
     // Should include all files in a given directory
     t.plan(5);
 
-    var config = loader.loadObject(fixture, __dirname + '/fixtures'),
+    var config = loader.object(fixture, __dirname + '/fixtures'),
         dirConfig = config.generate('directory');
 
     t.equals(dirConfig.directory, undefined);
@@ -97,7 +97,7 @@ test('invalid filters', function(t) {
     // Throw error when trying to use unknown filter
     t.plan(1);
 
-    var config = loader.loadObject(fixture, __dirname + '/fixtures');
+    var config = loader.object(fixture, __dirname + '/fixtures');
 
     t.throws(function() {
         config.generate('instagram', 'foobar');
@@ -108,7 +108,7 @@ test('inclusive filter', function(t) {
     // Create a filtered "submodule" that only includes files with a pattern
     t.plan(2);
 
-    var config = loader.loadObject(fixture, __dirname + '/fixtures'),
+    var config = loader.object(fixture, __dirname + '/fixtures'),
         mobileConfig = config.generate('instagram', 'mobile'),
         allConfig = config.generate('instagram', 'all');
 
@@ -123,7 +123,7 @@ test('exclusive filter', function(t) {
     // Create a filtered "submodule" that only includes files without a pattern
     t.plan(1);
 
-    var config = loader.loadObject(fixture, __dirname + '/fixtures'),
+    var config = loader.object(fixture, __dirname + '/fixtures'),
         mobileConfig = config.generate('instagram', 'desktop');
 
     t.looseEquals(mobileConfig.include, ['instagram/file1.js',
@@ -135,7 +135,7 @@ test('placeholder', function(t) {
     // files stubbed out with empty functions
     t.plan(4);
 
-    var config = loader.loadObject(fixture, __dirname + '/fixtures'),
+    var config = loader.object(fixture, __dirname + '/fixtures'),
         placeholderConfig = config.generatePlaceholder('instagram', 'desktop');
 
     t.ok(placeholderConfig.rawText.hasOwnProperty('instagram/file1.js'));
