@@ -22,7 +22,7 @@ test('load config from object', function(t) {
 
     var config = Config.loadObject(scaffold, __dirname);
 
-    t.looseEqual(config.config, scaffold, 'make sure config is stored in object');
+    t.looseEquals(config.config, scaffold, 'make sure config is stored in object');
     t.equals(config.baseUrl, __dirname, 'make sure baseUrl is stored in object');
 });
 
@@ -43,7 +43,7 @@ test('load config from file', function(t) {
 
     var config = Config.loadFile(__dirname + '/fixtures/requirejs-build.json');
 
-    t.looseEqual(config.config, fixture, 'make sure config is stored in object');
+    t.looseEquals(config.config, fixture, 'make sure config is stored in object');
     t.equals(config.baseUrl, __dirname + '/fixtures', 'make sure baseUrl is stored in object');
 });
 
@@ -62,9 +62,9 @@ test('load config from directory', function(t) {
         Config.loadFromDirectory('/');
     }, /Could not locate requirejs-build.json/, 'missing file should throw');
 
-    t.looseEqual(Config.loadFromDirectory(__dirname + '/fixtures').config,
+    t.looseEquals(Config.loadFromDirectory(__dirname + '/fixtures').config,
                  fixture, 'make sure config is stored in object');
 
-    t.looseEqual(Config.loadFromDirectory(__dirname + '/fixtures/subdir').config,
+    t.looseEquals(Config.loadFromDirectory(__dirname + '/fixtures/subdir').config,
                  fixture, 'make sure baseUrl is stored in object');
 });

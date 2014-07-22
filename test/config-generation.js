@@ -20,8 +20,8 @@ test('generate requirejs module config', function(t) {
 
     var config = Config.loadObject(fixture, __dirname).generate('libs');
 
-    t.equal(config.optimize, fixture.default.optimize);
-    t.looseEqual(config.include, fixture.modules.libs.include);
+    t.equals(config.optimize, fixture.default.optimize);
+    t.looseEquals(config.include, fixture.modules.libs.include);
 });
 
 test('module config should override default config', function(t) {
@@ -29,7 +29,7 @@ test('module config should override default config', function(t) {
 
     var config = Config.loadObject(fixture, __dirname).generate('shared');
 
-    t.equal(config.optimize, fixture.modules.shared.optimize);
+    t.equals(config.optimize, fixture.modules.shared.optimize);
 });
 
 test('path options should have its urls resolved', function(t) {
@@ -38,9 +38,9 @@ test('path options should have its urls resolved', function(t) {
 
     t.plan(3);
 
-    t.equal(config.optimize, fixture.default.optimize);
-    t.equal(config.mainConfigFile, path.join(__dirname, fixture.default.mainConfigFile));
-    t.equal(config.baseUrl, path.join(__dirname, fixture.default.baseUrl));
+    t.equals(config.optimize, fixture.default.optimize);
+    t.equals(config.mainConfigFile, path.join(__dirname, fixture.default.mainConfigFile));
+    t.equals(config.baseUrl, path.join(__dirname, fixture.default.baseUrl));
 });
 
 test('excludeModules', function(t) {
@@ -50,10 +50,10 @@ test('excludeModules', function(t) {
     var config = Config.loadObject(fixture, __dirname),
         libsConfig = config.generate('shared');
 
-    t.equal(libsConfig.excludeModules, undefined);
+    t.equals(libsConfig.excludeModules, undefined);
 
     // excludeModules config should exclude other modules
-    t.looseEqual(libsConfig.exclude, ['jquery', 'lodash']);
+    t.looseEquals(libsConfig.exclude, ['jquery', 'lodash']);
 
     t.throws(function() {
         config.generate('excludeModulesFaulty');
@@ -75,9 +75,9 @@ test('directory option', function(t) {
     var config = Config.loadObject(fixture, __dirname + '/fixtures'),
         dirConfig = config.generate('directory');
 
-    t.equal(dirConfig.directory, undefined);
+    t.equals(dirConfig.directory, undefined);
 
-    t.looseEqual(dirConfig.include,
+    t.looseEquals(dirConfig.include,
                  ['directory/file1.js', 'directory/file2.js', 'directory/subdir/file3.js']);
 
     t.throws(function() {
