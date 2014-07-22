@@ -129,3 +129,20 @@ test('exclusive filter', function(t) {
     t.looseEquals(mobileConfig.include, ['instagram/file1.js',
                                          'instagram/file2.js']);
 });
+
+test('placeholder', function(t) {
+    // It should be possible to generate placeholder for modules with all the
+    // files stubbed out with empty functions
+    t.plan(4);
+
+    var config = Config.loadObject(fixture, __dirname + '/fixtures'),
+        placeholderConfig = config.generatePlaceholder('instagram', 'desktop');
+
+    t.ok(placeholderConfig.rawText.hasOwnProperty('instagram/file1.js'));
+    t.ok(placeholderConfig.rawText.hasOwnProperty('instagram/file2.js'));
+    t.notOk(placeholderConfig.rawText.hasOwnProperty('instagram/file1.mobile.js'));
+
+    t.throws(function() {
+        config.generatePlaceholder('rawTextFaulty');
+    }, /rawText must be an object/);
+});
