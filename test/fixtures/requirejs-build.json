@@ -22,9 +22,11 @@
             "excludeModules": ["libs"]
         },
         "instagram": {
-            "directory": "modules/instagram",
-            "subModules": {
-                "mobile": ".mobile."
+            "directory": "instagram",
+            "filters": {
+                "desktop": "!(*.mobile.*)",
+                "mobile": "*.mobile.*",
+                "all": "*"
             }
         },
         "excludeModulesFaulty": {

@@ -92,3 +92,40 @@ test('directory option', function(t) {
         config.generate('includeNotArray');
     }, /include must be an array/);
 });
+
+test('invalid filters', function(t) {
+    // Throw error when trying to use unknown filter
+    t.plan(1);
+
+    var config = Config.loadObject(fixture, __dirname + '/fixtures');
+
+    t.throws(function() {
+        config.generate('instagram', 'foobar');
+    }, /Unknown filter/);
+});
+
+test('inclusive filter', function(t) {
+    // Create a filtered "submodule" that only includes files with a pattern
+    t.plan(2);
+
+    var config = Config.loadObject(fixture, __dirname + '/fixtures'),
+        mobileConfig = config.generate('instagram', 'mobile'),
+        allConfig = config.generate('instagram', 'all');
+
+    t.looseEquals(mobileConfig.include, ['instagram/file1.mobile.js']);
+
+    t.looseEquals(allConfig.include, ['instagram/file1.js',
+                                      'instagram/file1.mobile.js',
+                                      'instagram/file2.js']);
+});
+
+test('exclusive filter', function(t) {
+    // Create a filtered "submodule" that only includes files without a pattern
+    t.plan(1);
+
+    var config = Config.loadObject(fixture, __dirname + '/fixtures'),
+        mobileConfig = config.generate('instagram', 'desktop');
+
+    t.looseEquals(mobileConfig.include, ['instagram/file1.js',
+                                         'instagram/file2.js']);
+});
