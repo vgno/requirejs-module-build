@@ -77,7 +77,7 @@ test('excludeModules', function(t) {
 
 test('directory option', function(t) {
     // Should include all files in a given directory
-    t.plan(5);
+    t.plan(6);
 
     var config = loader.object(fixture, __dirname + '/fixtures');
 
@@ -95,6 +95,10 @@ test('directory option', function(t) {
 
     config.generate('missingDirectory', null, function(err) {
         t.ok(err.match(/No such directory/));
+    });
+
+    config.generate('fileAsDirectory', null, function(err) {
+        t.ok(err.match(/is not a directory/));
     });
 
     config.generate('includeNotArray', null, function(err) {
@@ -145,7 +149,7 @@ test('exclusive filter', function(t) {
 test('placeholder', function(t) {
     // It should be possible to generate placeholder for modules with all the
     // files stubbed out with empty functions
-    t.plan(4);
+    t.plan(5);
 
     var config = loader.object(fixture, __dirname + '/fixtures');
 
@@ -158,4 +162,10 @@ test('placeholder', function(t) {
     config.generatePlaceholder('rawTextFaulty', null, function(err) {
         t.equals(err, 'rawText must be an object');
     });
+
+    // Except for invalid modules
+    config.generatePlaceholder('invalidDirectory', null, function(err) {
+        t.ok(err);
+    });
+});
 });

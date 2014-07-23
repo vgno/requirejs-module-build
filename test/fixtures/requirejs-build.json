@@ -49,6 +49,9 @@
         "missingDirectory": {
             "directory": "missing-directory"
         },
+        "fileAsDirectory": {
+            "directory": "requirejs-build.json"
+        },
         "includeNotArray": {
             "directory": "directory",
             "include": {}
