@@ -36,9 +36,9 @@ test('module config should override default config', function(t) {
     });
 });
 
-test('path options should have its urls resolved', function(t) {
+test('path options should have its path resolved', function(t) {
     // Config in the default object should be outputed in the generated requirejs config
-    t.plan(3);
+    t.plan(4);
 
     var config = loader.object(fixture, __dirname);
 
@@ -46,6 +46,9 @@ test('path options should have its urls resolved', function(t) {
         t.equals(config.optimize, fixture.default.optimize);
         t.equals(config.mainConfigFile, path.join(__dirname, fixture.default.mainConfigFile));
         t.equals(config.baseUrl, path.join(__dirname, fixture.default.baseUrl));
+
+        // Paths starting with / shouldnt be resolved
+        t.equals(config.binary, fixture.default.binary);
     });
 });
 
@@ -168,4 +171,31 @@ test('placeholder', function(t) {
         t.ok(err);
     });
 });
+
+test('get list of modules', function(t) {
+    t.plan(1);
+
+    var config = loader.object({
+        modules: {
+            test: {},
+            test2: {}
+        }
+    }, __dirname + '/fixtures');
+
+    t.looseEquals(config.getModules(), ['test', 'test2']);
+});
+
+test('get list of module filters', function(t) {
+    t.plan(3);
+
+    var config = loader.object(fixture, __dirname);
+
+    t.looseEquals(config.getModuleFilters('instagram'),
+                  ['desktop', 'mobile', 'all']);
+
+    t.equals(config.getModuleFilters('libs'), null);
+
+    t.throws(function() {
+        config.getModuleFilters('missing');
+    }, /Unknown module/);
 });

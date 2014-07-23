@@ -4,7 +4,8 @@
         "baseUrl": "",
         "output": "out",
         "optimize": "uglify2",
-        "excludeModules": ["libs", "shared"]
+        "excludeModules": ["libs", "shared"],
+        "binary": "/usr/local/bin/r.js"
     },
     "modules": {
         "libs": {
