@@ -4,6 +4,9 @@
     "author": "Espen Volden <espenv@vg.no>",
     "description": "Tool for building requirejs modules",
     "main": "./lib/main",
+    "bin": {
+        "requirejs-build": "./bin/requirejs-build.js"
+    },
     "dependencies": {
         "findup-sync": "0.1.x",
         "extend": "1.3.x",
