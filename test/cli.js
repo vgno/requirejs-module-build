@@ -41,39 +41,39 @@ test('missing config option', function(t) {
 });
 
 test('module', function(t) {
-    t.plan(1);
-
-    var stub = sinon.stub(Config.prototype, 'generate');
-
-    cli({ _: ['directory'], config: configFile });
-
-    stub.restore();
-
-    t.ok(stub.calledWith('directory', undefined));
-});
-
-test('module with filter option', function(t) {
     t.plan(3);
+
+    sinon.spy(Config.prototype, 'generate');
+    sinon.spy(builder, 'writeConfig');
 
     sinon.stub(fs, 'writeFile', function(file, content, callback) {
         callback(null, file);
     });
 
-    sinon.spy(Config.prototype, 'generate');
-    sinon.spy(builder, 'writeConfig');
-    sinon.stub(builder, 'build');
+    sinon.stub(builder, 'build', function() {
+        t.ok(Config.prototype.generate.calledWith('directory', undefined));
+        t.ok(builder.writeConfig.called);
+        t.ok(builder.build.called);
 
-    cli({ _: ['libs'], config: configFile, filter: 'foo' });
+        fs.writeFile.restore();
+        Config.prototype.generate.restore();
+        builder.writeConfig.restore();
+        builder.build.restore();
+    });
 
-    fs.writeFile.restore();
+    cli({ _: ['directory'], config: configFile });
+});
 
-    t.ok(Config.prototype.generate.calledWith('libs', 'foo'));
-    t.ok(builder.writeConfig.called);
-    t.ok(builder.build.called);
+test('module with filter option', function(t) {
+    t.plan(1);
 
-    Config.prototype.generate.restore();
-    builder.writeConfig.restore();
-    builder.build.restore();
+    var stub = sinon.stub(Config.prototype, 'generate');
+
+    cli({ _: ['instagram'], config: configFile, filter: 'mobile' });
+
+    stub.restore();
+
+    t.ok(stub.calledWith('instagram', 'mobile'));
 });
 
 test('module with filters and no filter option', function(t) {
