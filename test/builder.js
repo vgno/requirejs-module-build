@@ -8,19 +8,23 @@ var test = require('tape'),
 test('writeConfig', function(t) {
     t.plan(2);
 
+    var mock = sinon.mock(fs);
+
     var config = loader.directory(__dirname + '/fixtures');
 
     config.generate('instagram', 'desktop', function(err, config) {
         var output = __dirname + '/work/test.json';
 
+        mock.expects('writeFile')
+            .withArgs(output, '(' + JSON.stringify(config, null, 4) + ')')
+            .callsArg(2);
+
         builder.writeConfig(output, config, function(err, file) {
             t.equals(output, file);
 
-            fs.readFile(file, 'UTF-8', function(err, data) {
-                data = JSON.parse(data.substring(1, data.length - 1));
+            t.ok(mock.verify());
 
-                t.looseEquals(data.include, ['instagram/file1.js', 'instagram/file2.js']);
-            });
+            mock.restore();
         });
     });
 });
