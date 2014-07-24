@@ -2,6 +2,7 @@ var test = require('tape'),
     sinon = require('sinon'),
     fs = require('fs'),
     cli = require('../lib/cli'),
+    cliBuild = require('../lib/cli/build'),
     loader = require('../lib/loader'),
     builder = require('../lib/builder'),
     Config = require('../lib/config');
@@ -90,20 +91,15 @@ test('module with filters and no filter option', function(t) {
 });
 
 test('all modules', function(t) {
-    t.plan(4);
+    t.plan(1);
 
-    var stub = sinon.stub(Config.prototype, 'generate');
+    var stub = sinon.stub(cliBuild, 'module');
 
     cli({ _: ['all'], config: configFile });
 
     stub.restore();
 
-    t.equals(stub.callCount, 18);
-
-    t.ok(stub.firstCall.calledWith('libs'));
-    t.ok(stub.lastCall.calledWith('invalidInherit'));
-
-    t.ok(stub.calledWith('instagram', 'desktop'));
+    t.equals(stub.callCount, 16);
 });
 
 test('all modules with filter', function(t) {
