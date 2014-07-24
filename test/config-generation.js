@@ -109,6 +109,22 @@ test('directory option', function(t) {
     });
 });
 
+test('directory option as module value', function(t) {
+    // A shortcut for setting the directory option on a module
+    // is to supply the directory path as the value of the module key
+    t.plan(2);
+
+    var config = loader.object(fixture, __dirname + '/fixtures');
+
+    config.generate('directoryAsValue', null, function(err, config) {
+        t.equals(config.directory, undefined);
+
+        t.looseEquals(config.include,
+                      ['directory/file1.js', 'directory/file2.js',
+                       'directory/subdir/file3.js']);
+    });
+});
+
 test('invalid filters', function(t) {
     // Throw error when trying to use unknown filter
     t.plan(1);

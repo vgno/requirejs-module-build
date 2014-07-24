@@ -98,7 +98,7 @@ test('all modules', function(t) {
 
     stub.restore();
 
-    t.equals(stub.callCount, 14);
+    t.equals(stub.callCount, 15);
 
     t.ok(stub.firstCall.calledWith('libs'));
     t.ok(stub.lastCall.calledWith('rawTextFaulty'));
