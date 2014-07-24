@@ -169,12 +169,13 @@ test('inherit option', function(t) {
     // The value of the inherit option should point to a key in the root level
     // in the config which will override the default options for the module
     // in question
-    t.plan(4);
+    t.plan(5);
 
     var config = loader.object(fixture, __dirname + '/fixtures');
 
     config.generate('inherit', null, function(err, config) {
         t.looseEquals(config.optimize, 'none');
+        t.looseEquals(config.inherit, undefined);
 
         // The options inside the module config should override the inherited
         // ones
