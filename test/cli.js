@@ -150,3 +150,19 @@ test('optimize option', function(t) {
 
     cli({ _: ['directory'], config: configFile, optimize: 'none' });
 });
+
+test('exists on config generation error', function(t) {
+    t.plan(2);
+
+    var stub = sinon.stub(Config.prototype, 'generate')
+            .callsArgWith(2, 'Error foo');
+
+    try {
+        cli({ _: ['libs'], config: configFile});
+    } catch (e) {
+        t.equals(e, 'Error foo');
+        t.ok(stub.threw());
+    }
+
+    stub.restore();
+});
