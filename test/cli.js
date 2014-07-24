@@ -140,3 +140,13 @@ test('verbose option', function(t) {
 
     cli({ _: ['directory'], config: configFile, verbose: true });
 });
+
+test('optimize option', function(t) {
+    t.plan(1);
+
+    sinon.stub(builder, 'writeConfig', function(file, config) {
+        t.equals(config.optimize, 'none');
+    });
+
+    cli({ _: ['directory'], config: configFile, optimize: 'none' });
+});
