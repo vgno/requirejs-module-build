@@ -123,3 +123,20 @@ test('all modules with filter', function(t) {
 
     t.ok(exitMock.verify());
 });
+
+test('verbose option', function(t) {
+    t.plan(2);
+
+    sinon.stub(builder, 'writeConfig')
+        .callsArg(2);
+
+    sinon.stub(builder, 'build', function(configFile, binary, verbose) {
+        t.ok(builder.writeConfig.called);
+        t.equals(verbose, true);
+
+        builder.writeConfig.restore();
+        builder.build.restore();
+    });
+
+    cli({ _: ['directory'], config: configFile, verbose: true });
+});
