@@ -165,6 +165,33 @@ test('exclusive filter', function(t) {
     });
 });
 
+test('inherit option', function(t) {
+    // The value of the inherit option should point to a key in the root level
+    // in the config which will override the default options for the module
+    // in question
+    t.plan(4);
+
+    var config = loader.object(fixture, __dirname + '/fixtures');
+
+    config.generate('inherit', null, function(err, config) {
+        t.looseEquals(config.optimize, 'none');
+
+        // The options inside the module config should override the inherited
+        // ones
+        t.ok(config.output.match(/foo$/));
+    });
+
+    config.generate('missingInherit', null, function(err) {
+        t.ok(err.match(/Could not inherit from missing config/),
+             'Missing inherit config');
+    });
+
+    config.generate('invalidInherit', null, function(err) {
+        t.ok(err.match(/Could not inherit from invalid config/),
+             'Invalid inherit config');
+    });
+});
+
 test('placeholder', function(t) {
     // It should be possible to generate placeholder for modules with all the
     // files stubbed out with empty functions

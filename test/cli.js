@@ -98,10 +98,10 @@ test('all modules', function(t) {
 
     stub.restore();
 
-    t.equals(stub.callCount, 15);
+    t.equals(stub.callCount, 18);
 
     t.ok(stub.firstCall.calledWith('libs'));
-    t.ok(stub.lastCall.calledWith('rawTextFaulty'));
+    t.ok(stub.lastCall.calledWith('invalidInherit'));
 
     t.ok(stub.calledWith('instagram', 'desktop'));
 });

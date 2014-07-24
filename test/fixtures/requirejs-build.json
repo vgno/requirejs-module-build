@@ -7,6 +7,11 @@
         "excludeModules": ["libs", "shared"],
         "binary": "/usr/local/bin/r.js"
     },
+    "inherit": {
+        "optimize": "none",
+        "output": "test"
+    },
+    "invalid": [],
     "modules": {
         "libs": {
             "include": [
@@ -60,6 +65,16 @@
         },
         "rawTextFaulty": {
             "rawText": []
+        },
+        "inherit": {
+            "inherit": "inherit",
+            "output": "foo"
+        },
+        "missingInherit": {
+            "inherit": "foo"
+        },
+        "invalidInherit": {
+            "inherit": "invalid"
         }
     }
 }
