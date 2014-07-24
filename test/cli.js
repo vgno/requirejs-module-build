@@ -45,14 +45,14 @@ test('module', function(t) {
 
     var stub = sinon.stub(Config.prototype, 'generate');
 
-    cli({ _: ['module'], config: configFile });
+    cli({ _: ['directory'], config: configFile });
 
     stub.restore();
 
-    t.ok(stub.calledWith('module', undefined));
+    t.ok(stub.calledWith('directory', undefined));
 });
 
-test('module with filter', function(t) {
+test('module with filter option', function(t) {
     t.plan(3);
 
     sinon.stub(fs, 'writeFile', function(file, content, callback) {
@@ -74,6 +74,19 @@ test('module with filter', function(t) {
     Config.prototype.generate.restore();
     builder.writeConfig.restore();
     builder.build.restore();
+});
+
+test('module with filters and no filter option', function(t) {
+    t.plan(2);
+
+    var stub = sinon.stub(Config.prototype, 'generate');
+
+    cli({ _: ['instagram'], config: configFile });
+
+    stub.restore();
+
+    t.equals(stub.callCount, 3);
+    t.ok(stub.firstCall.calledWith('instagram', 'desktop'));
 });
 
 test('all modules', function(t) {
