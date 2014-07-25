@@ -2,7 +2,7 @@
     "name": "requirejs-module-build",
     "version": "0.0.1",
     "author": "Espen Volden <espenv@vg.no>",
-    "description": "Tool for building requirejs modules",
+    "description": "Tool for configuring and building non-CommonJS requirejs modules",
     "main": "./lib/main",
     "bin": {
         "requirejs-build": "./bin/requirejs-build.js"
