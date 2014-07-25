@@ -4,6 +4,8 @@ requirejs-module-build
 A system to make it easier to configure and build a lot of non-CommonJS RequireJS modules.
 
 [![build-status](https://travis-ci.org/vgnett/requirejs-module-build.svg?branch=master)](http://travis-ci.org/vgnett/requirejs-module-build)
+[![Dependency Status](https://david-dm.org/vgnett/requirejs-module-build.svg)](https://david-dm.org/vgnett/requirejs-module-build)
+[![devDependency Status](https://david-dm.org/vgnett/requirejs-module-build/dev-status.svg)](https://david-dm.org/vgnett/requirejs-module-build#info=devDependencies)
 
 installation
 ====
