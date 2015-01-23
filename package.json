@@ -13,10 +13,10 @@
         "minimist": "1.1.x"
     },
     "devDependencies": {
-        "tape": "2.13.x",
+        "tape": "3.4.x",
         "faucet": "0.0.x",
-        "covert": "0.4.x",
-        "sinon": "1.10.x"
+        "covert": "1.0.x",
+        "sinon": "1.12.x"
     },
     "scripts": {
         "test": "faucet"
