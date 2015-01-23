@@ -7,10 +7,10 @@
         "requirejs-build": "./bin/requirejs-build.js"
     },
     "dependencies": {
-        "findup-sync": "0.1.x",
-        "extend": "1.3.x",
-        "glob": "4.0.x",
-        "minimist": "0.2.x"
+        "findup-sync": "0.2.x",
+        "extend": "2.0.x",
+        "glob": "4.3.x",
+        "minimist": "1.1.x"
     },
     "devDependencies": {
         "tape": "2.13.x",
