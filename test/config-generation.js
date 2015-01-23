@@ -42,7 +42,7 @@ test('path options should have its path resolved', function(t) {
 
     var config = loader.object(fixture, __dirname);
 
-    config.generate('libs', null, function(err, config) {
+    config.generate('libs', 'fixtures', function(err, config) {
         t.equals(config.optimize, fixture.default.optimize);
         t.equals(config.mainConfigFile, path.join(__dirname, fixture.default.mainConfigFile));
         t.equals(config.baseUrl, path.join(__dirname, fixture.default.baseUrl));
