@@ -1,6 +1,6 @@
 {
     "name": "requirejs-module-build",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Tool for configuring and building non-CommonJS requirejs modules",
     "main": "./lib/main",
     "bin": {
