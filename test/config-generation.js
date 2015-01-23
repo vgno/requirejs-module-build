@@ -114,8 +114,8 @@ test('directory option', function(t) {
         t.equals(config.directory, undefined);
 
         t.looseEquals(config.include,
-                      ['directory/file1.js', 'directory/file2.js',
-                       'directory/subdir/file3.js']);
+                      ['directory/file1', 'directory/file2',
+                       'directory/subdir/file3']);
     });
 
     config.generate('invalidDirectory', null, function(err) {
@@ -146,8 +146,8 @@ test('directory option as module value', function(t) {
         t.equals(config.directory, undefined);
 
         t.looseEquals(config.include,
-                      ['directory/file1.js', 'directory/file2.js',
-                       'directory/subdir/file3.js']);
+                      ['directory/file1', 'directory/file2',
+                       'directory/subdir/file3']);
     });
 });
 
@@ -169,13 +169,13 @@ test('inclusive filter', function(t) {
     var config = loader.object(fixture, __dirname + '/fixtures');
 
     config.generate('instagram', 'mobile', function(err, config) {
-        t.looseEquals(config.include, ['instagram/file1.mobile.js']);
+        t.looseEquals(config.include, ['instagram/file1.mobile']);
     });
 
     config.generate('instagram', 'all', function(err, config) {
-        t.looseEquals(config.include, ['instagram/file1.js',
-                                       'instagram/file1.mobile.js',
-                                       'instagram/file2.js']);
+        t.looseEquals(config.include, ['instagram/file1',
+                                       'instagram/file1.mobile',
+                                       'instagram/file2']);
     });
 });
 
@@ -186,8 +186,8 @@ test('exclusive filter', function(t) {
     var config = loader.object(fixture, __dirname + '/fixtures');
 
     config.generate('instagram', 'desktop', function(err, config) {
-        t.looseEquals(config.include, ['instagram/file1.js',
-                                       'instagram/file2.js']);
+        t.looseEquals(config.include, ['instagram/file1',
+                                       'instagram/file2']);
     });
 });
 
@@ -227,9 +227,9 @@ test('placeholder', function(t) {
     var config = loader.object(fixture, __dirname + '/fixtures');
 
     config.generatePlaceholder('instagram', 'desktop', function(err, config) {
-        t.ok(config.rawText.hasOwnProperty('instagram/file1.js'));
-        t.ok(config.rawText.hasOwnProperty('instagram/file2.js'));
-        t.notOk(config.rawText.hasOwnProperty('instagram/file1.mobile.js'));
+        t.ok(config.rawText.hasOwnProperty('instagram/file1'));
+        t.ok(config.rawText.hasOwnProperty('instagram/file2'));
+        t.notOk(config.rawText.hasOwnProperty('instagram/file1.mobile'));
     });
 
     config.generatePlaceholder('rawTextFaulty', null, function(err) {
