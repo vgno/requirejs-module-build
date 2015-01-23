@@ -25,7 +25,8 @@
             "include": [
                 "utils"
             ],
-            "excludeModules": ["libs"]
+            "excludeModules": ["libs"],
+            "shallowExcludeModules": ["libs"]
         },
         "instagram": {
             "directory": "instagram",
@@ -39,12 +40,23 @@
             "excludeModules": {},
             "exclude": true
         },
+        "shallowExcludeModulesFaulty": {
+            "shallowExcludeModules": {},
+            "shallowExclude": true
+        },
         "excludeNotArray": {
             "excludeModules": ["libs"],
             "exclude": true
         },
+        "excludeShallowNotArray": {
+            "shallowExcludeModules": ["libs"],
+            "excludeShallow": true
+        },
         "excludeMissingModule": {
             "excludeModules": ["missing-module"]
+        },
+        "shallowExcludeMissingModule": {
+            "shallowExcludeModules": ["missing-module"]
         },
         "directory": {
             "directory": "directory"

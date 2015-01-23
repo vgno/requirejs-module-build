@@ -78,6 +78,32 @@ test('excludeModules', function(t) {
     });
 });
 
+test('shallowExcludeModules', function(t) {
+    t.plan(5);
+
+    // excludeModules config should not be part of RequireJS config
+    var config = loader.object(fixture, __dirname);
+
+    config.generate('shared', null, function(err, config) {
+        t.equals(config.shallowExcludeModules, undefined);
+
+        // shallowExcludeModules config should excludeShallow other modules
+        t.looseEquals(config.excludeShallow, ['jquery', 'lodash']);
+    });
+
+    config.generate('shallowExcludeModulesFaulty', null, function(err) {
+        t.equals(err, 'shallowExcludeModules must be an array');
+    });
+
+    config.generate('excludeShallowNotArray', null, function(err) {
+        t.equals(err, 'excludeShallow must be an array');
+    });
+
+    config.generate('shallowExcludeMissingModule', null, function(err) {
+        t.equals(err, 'Can not excludeShallow unconfigured module missing-module');
+    });
+});
+
 test('directory option', function(t) {
     // Should include all files in a given directory
     t.plan(6);

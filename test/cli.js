@@ -99,7 +99,7 @@ test('all modules', function(t) {
 
     stub.restore();
 
-    t.equals(stub.callCount, 16);
+    t.equals(stub.callCount, 19);
 });
 
 test('all modules with filter', function(t) {
