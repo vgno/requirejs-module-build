@@ -6,12 +6,16 @@ var parseArgs = require('minimist'),
 var argv = parseArgs(process.argv.slice(2), {
     string: ['filter', 'config', 'optimizer'],
     boolean: ['verbose', 'placeholder', 'help'],
+    default: {
+        parallel: 5
+    },
     alias: {
         filter: 'f',
         config: 'c',
         verbose: 'v',
         help: 'h',
-        optimizer: 'o'
+        optimizer: 'o',
+        parallel: 'p'
     }
 });
 

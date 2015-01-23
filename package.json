@@ -10,7 +10,8 @@
         "findup-sync": "0.2.x",
         "extend": "2.0.x",
         "glob": "4.3.x",
-        "minimist": "1.1.x"
+        "minimist": "1.1.x",
+        "async": "0.9.x"
     },
     "devDependencies": {
         "tape": "3.4.x",
