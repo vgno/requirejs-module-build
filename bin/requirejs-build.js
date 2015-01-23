@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var parseArgs = require('minimist'),
-    cli = require('../lib/cli');
+    cli = require('../lib/cli'),
+    util = require('util');
 
 var argv = parseArgs(process.argv.slice(2), {
     string: ['filter', 'config', 'optimizer'],
@@ -19,4 +20,8 @@ var argv = parseArgs(process.argv.slice(2), {
     }
 });
 
-cli(argv);
+cli(argv, null, function(err) {
+    if (err) {
+        util.print(err);
+    }
+});

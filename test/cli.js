@@ -93,13 +93,13 @@ test('module with filters and no filter option', function(t) {
 test('all modules', function(t) {
     t.plan(1);
 
-    var stub = sinon.stub(cliBuild, 'module');
+    var stub = sinon.stub(cliBuild, 'module').yields();
 
-    cli({ _: ['all'], config: configFile });
+    cli({ _: ['all'], config: configFile }, null, function() {
+        stub.restore();
 
-    stub.restore();
-
-    t.equals(stub.callCount, 19);
+        t.equals(stub.callCount, 19);
+    });
 });
 
 test('all modules with filter', function(t) {
