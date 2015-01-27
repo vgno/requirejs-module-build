@@ -30,6 +30,7 @@ Options:
   -f, --filter <name>           Filter/submodule name
   -c, --config <path>           Path to config file
   -o, --optimizer <name>        Override RequireJS optimizer
+  -p, --parallel <number>	    Number of parallel builds to run. Defaults is 5
   --placeholder                 Build placeholder
   -v, --verbose                 Be verbose
   -h, --help                    Print this
