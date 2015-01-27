@@ -90,6 +90,32 @@ test('module with filters and no filter option', function(t) {
     t.ok(stub.firstCall.calledWith('instagram', 'desktop'));
 });
 
+test('module with placeholder option', function(t) {
+    t.plan(2);
+
+    var stub = sinon.stub(Config.prototype, 'generatePlaceholder');
+
+    cli({ _: ['instagram'], config: configFile, placeholder: true });
+
+    stub.restore();
+
+    t.ok(stub.firstCall.calledWith('instagram', 'desktop'));
+    t.equals(stub.callCount, 3);
+});
+
+test('module with placeholder and filter option', function(t) {
+    t.plan(2);
+
+    var stub = sinon.stub(Config.prototype, 'generatePlaceholder');
+
+    cli({ _: ['instagram'], config: configFile, placeholder: true, filter: 'mobile' });
+
+    stub.restore();
+
+    t.ok(stub.calledWith('instagram', 'mobile'));
+    t.equals(stub.callCount, 1);
+});
+
 test('all modules', function(t) {
     t.plan(1);
 
