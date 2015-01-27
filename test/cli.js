@@ -90,7 +90,7 @@ test('module with filters and no filter option', function(t) {
     t.ok(stub.firstCall.calledWith('instagram', 'desktop'));
 });
 
-test('module with placeholder option', function(t) {
+test('module with placeholder cli option', function(t) {
     t.plan(2);
 
     var stub = sinon.stub(Config.prototype, 'generatePlaceholder');
@@ -103,7 +103,7 @@ test('module with placeholder option', function(t) {
     t.equals(stub.callCount, 3);
 });
 
-test('module with placeholder and filter option', function(t) {
+test('module with placeholder and filter cli option', function(t) {
     t.plan(2);
 
     var stub = sinon.stub(Config.prototype, 'generatePlaceholder');
@@ -116,6 +116,28 @@ test('module with placeholder and filter option', function(t) {
     t.equals(stub.callCount, 1);
 });
 
+test('module with buildPlaceholder config option', function(t) {
+    t.plan(4);
+
+    var generateStub = sinon.stub(Config.prototype, 'generate');
+    var placeholderStub = sinon.stub(Config.prototype, 'generatePlaceholder');
+
+    sinon.stub(console, 'log');
+
+    cli({ _: ['instagramWithPlaceholder'], config: configFile });
+
+    console.log.restore();
+
+    generateStub.restore();
+    placeholderStub.restore();
+
+    t.ok(generateStub.firstCall.calledWith('instagramWithPlaceholder', 'desktop'));
+    t.ok(placeholderStub.firstCall.calledWith('instagramWithPlaceholder', 'desktop'));
+
+    t.equals(generateStub.callCount, 3);
+    t.equals(placeholderStub.callCount, 3);
+});
+
 test('all modules', function(t) {
     t.plan(1);
 
@@ -124,7 +146,7 @@ test('all modules', function(t) {
     cli({ _: ['all'], config: configFile }, null, function() {
         stub.restore();
 
-        t.equals(stub.callCount, 19);
+        t.equals(stub.callCount, 20);
     });
 });
 

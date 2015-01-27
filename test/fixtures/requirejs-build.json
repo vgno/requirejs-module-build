@@ -36,6 +36,15 @@
                 "all": "*"
             }
         },
+        "instagramWithPlaceholder": {
+            "directory": "instagram",
+            "filters": {
+                "desktop": "!(*.mobile.*)",
+                "mobile": "*.mobile.*",
+                "all": "*"
+            },
+            "buildPlaceholder": true
+        },
         "excludeModulesFaulty": {
             "excludeModules": {},
             "exclude": true
