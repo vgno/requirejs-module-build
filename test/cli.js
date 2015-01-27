@@ -70,7 +70,11 @@ test('module with filter option', function(t) {
 
     var stub = sinon.stub(Config.prototype, 'generate');
 
+    sinon.stub(console, 'log');
+
     cli({ _: ['instagram'], config: configFile, filter: 'mobile' });
+
+    console.log.restore();
 
     stub.restore();
 
@@ -82,7 +86,11 @@ test('module with filters and no filter option', function(t) {
 
     var stub = sinon.stub(Config.prototype, 'generate');
 
+    sinon.stub(console, 'log');
+
     cli({ _: ['instagram'], config: configFile });
+
+    console.log.restore();
 
     stub.restore();
 
@@ -95,7 +103,11 @@ test('module with placeholder cli option', function(t) {
 
     var stub = sinon.stub(Config.prototype, 'generatePlaceholder');
 
+    sinon.stub(console, 'log');
+
     cli({ _: ['instagram'], config: configFile, placeholder: true });
+
+    console.log.restore();
 
     stub.restore();
 
@@ -108,7 +120,11 @@ test('module with placeholder and filter cli option', function(t) {
 
     var stub = sinon.stub(Config.prototype, 'generatePlaceholder');
 
+    sinon.stub(console, 'log');
+
     cli({ _: ['instagram'], config: configFile, placeholder: true, filter: 'mobile' });
+
+    console.log.restore();
 
     stub.restore();
 
